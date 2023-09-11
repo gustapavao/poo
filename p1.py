@@ -1,18 +1,29 @@
+import time, os
+from random import randint
 class sorting:
-    import time, os
-    def __init__(self):
-        import os
-        self.DIRATUAL      = os.path.dirname(os.path.abspath(__file__)) 
-        self.ARQUIVO_INPUT = self.DIRATUAL + '/valores_nao_ordenados.txt'
-        self.arquivo       = open(self.ARQUIVO_INPUT, 'r')
-        self.lstValores    = list()
-        while True:
-            valor = self.arquivo.readline()[:-1]
-            if not valor: break
-            self.lstValores.append(int(valor))
-        self.arquivo.close()
+    def __init__(self, *args):
+        self.DIRATUAL      = os.path.dirname(os.path.abspath(__file__))
+        if len(args) == 3 and isinstance(args[0], int) and isinstance(args[1], int) and isinstance(args[0], int):
+            self.lstValores = [randint(args[1], args[2]) for _ in range(args[0])]
+        elif len(args) == 1 and isinstance (args[0], str): 
+            self.ARQUIVO_INPUT = self.DIRATUAL + f'/{args[0]}'
+            try:
+                self.arquivo       = open(self.ARQUIVO_INPUT, 'r')
+            except FileNotFoundError:
+                print('Arquivo não encontrado')
+            except:
+                print('Erro')
+            else:
+                self.lstValores    = list()
+                while True:
+                    valor = self.arquivo.readline()[:-1]
+                    if not valor: break
+                    self.lstValores.append(int(valor))
+                self.arquivo.close()
+        else:
+            print('None')
+    
     def ordena_bubble(self):
-        import time
         print('\nIniciando a Ordenação...\n')
         tInicial = time.time()
         intSize = len(self.lstValores)
@@ -24,7 +35,6 @@ class sorting:
         dTime  = tFinal - tInicial
         print(f'\nTempo de Execução: {dTime} segundos\n')
     def ordena_insertion(self):
-        import time
         print('\nIniciando a Ordenação...\n')
         tInicial = time.time()
         for i in range(1, len(self.lstValores)):
@@ -38,7 +48,6 @@ class sorting:
         dTime  = tFinal - tInicial
         print(f'\nTempo de Execução: {dTime} segundos\n')
     def ordena_selection(self):
-        import time
         print('\nIniciando a Ordenação...\n')
         tInicial = time.time()
         for i in range(len(self.lstValores)):
@@ -72,6 +81,6 @@ class sorting:
         for i in self.lstValores: arquivo.write(f'{i}\n')
         arquivo.close()
 
-numeros = sorting()
+numeros = sorting(50, 1, 200)
 numeros.ordena_quick()
 numeros.salvar_arquivo()
