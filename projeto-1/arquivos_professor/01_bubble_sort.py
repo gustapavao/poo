@@ -6,7 +6,7 @@ print('\nExemplo de Ordenação utilizando o Método BUBBLE SORT...\n')
 # Montando a lista de valores a partir de um arquivo
 print('\nMontando a lista...\n')
 DIRATUAL      = os.path.dirname(os.path.abspath(__file__)) 
-ARQUIVO_INPUT = DIRATUAL + '\\valores_nao_ordenados.txt'
+ARQUIVO_INPUT = DIRATUAL + '/valores_nao_ordenados.txt'
 arquivo       = open(ARQUIVO_INPUT, 'r')
 lstValores    = list()
 while True:
@@ -31,7 +31,7 @@ dTime  = tFinal - tInicial
 
 # ----------------------------------------------------------------------
 # Excrevendo a lista em um arquivo
-ARQUIVO_OUTPUT = DIRATUAL + '\\valores_ordenados.txt'
+ARQUIVO_OUTPUT = DIRATUAL + '/valores_ordenados.txt'
 arquivo        = open(ARQUIVO_OUTPUT, 'w')
 for i in lstValores: arquivo.write(f'{i}\n')
 arquivo.close()
