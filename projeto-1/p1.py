@@ -24,16 +24,19 @@ class sorting:
             print('None')
     
     def ordena_bubble(self):
-        print('\nIniciando a Ordenação...\n')
-        tInicial = time.time()
-        intSize = len(self.lstValores)
-        for i in range(intSize):
-            for j in range(intSize - i - 1):
-                if self.lstValores[j] > self.lstValores[j + 1]:
-                    self.lstValores[j], self.lstValores[j + 1] = self.lstValores[j + 1], self.lstValores[j]
-        tFinal = time.time()
-        dTime  = tFinal - tInicial
-        print(f'\nTempo de Execução: {dTime} segundos\n')
+        try:
+            print('\nIniciando a Ordenação...\n')
+            tInicial = time.time()
+            intSize = len(self.lstValores)
+            for i in range(intSize):
+                for j in range(intSize - i - 1):
+                    if self.lstValores[j] > self.lstValores[j + 1]:
+                        self.lstValores[j], self.lstValores[j + 1] = self.lstValores[j + 1], self.lstValores[j]
+            tFinal = time.time()
+            dTime  = tFinal - tInicial
+            print(f'\nTempo de Execução: {dTime} segundos\n')
+        except AttributeError:
+            print('Houve um problema!')
     def ordena_insertion(self):
         print('\nIniciando a Ordenação...\n')
         tInicial = time.time()
@@ -78,9 +81,12 @@ class sorting:
     def salvar_arquivo(self):
         ARQUIVO_OUTPUT = self.DIRATUAL + '/valores_ordenados.txt'
         arquivo = open(ARQUIVO_OUTPUT, 'w')
-        for i in self.lstValores: arquivo.write(f'{i}\n')
-        arquivo.close()
+        try:    
+            for i in self.lstValores: arquivo.write(f'{i}\n')
+            arquivo.close()
+        except:
+            print('Houve um erro e não foi possível salvar')
 
-numeros = sorting(50, 1, 200)
-numeros.ordena_quick()
+numeros = sorting('pipipipo.txt')
+numeros.ordena_bubble()
 numeros.salvar_arquivo()
